@@ -1,7 +1,6 @@
 package model;
 
-public class Worm {
-	
+public class Predator {
 	
 	
 }
