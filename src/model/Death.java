@@ -2,12 +2,14 @@ package model;
 
 public enum Death {
 
-	AGEING, PREDATION, WORMBAG;
+	ALIVE, AGEING, PREDATION, WORMBAG;
 
 	@Override
 	public String toString() {
 		String s = "";
 		switch (this) {
+		case ALIVE:
+			s = "alive";
 		case AGEING:
 			s = "ageing";
 		case PREDATION:

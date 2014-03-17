@@ -1,6 +1,6 @@
 package model;
 
-public class Location {
+public class Environment {
 	
 	
 	

@@ -13,11 +13,11 @@ public class Timer {
 	}
 	
 	public void initialize() {
-		initialTime = System.nanoTime();
+		initialTime = System.currentTimeMillis();
 	}
 	
 	public long currentTime() {
-		return (System.nanoTime() - initialTime);
+		return (System.currentTimeMillis() - initialTime);
 	}
 
 }

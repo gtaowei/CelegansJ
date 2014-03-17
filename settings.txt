@@ -1,21 +1,24 @@
-output-file 
-initial-number-worms
-worms-gain-from-food
-reproduce-energy-cost
-worms-max-progeny
-initial-worm-energy-min 
-initial-worm-energy-max
-initial-bacteria-concentration 
-bacteria-replenish-interval 
-bacteria-replenish-concentration
-predation-interval
-predation-percentage
-adult-movement-energy-cost
-larvae-movement-energy-cost
-larvae-initial-energy
-wormbag-dormancy
-wormbag-energy-threshold
-wormbag-max-progeny
-larvae-max-size
-adult-max-size
-size-energy-multiplier
+output_file = log.txt
+dimension_x = 100
+dimension_y = 100
+dimension_z = 100
+initial_number_worms = 150
+worms_gain_from_food = 1000
+reproduce_energy_cost = 800
+worms_max_progeny = 2
+initial_worm_energy_min = 3000 
+initial_worm_energy_max = 4000
+initial_bacteria_concentration = 100 
+bacteria_replenish_interval = 20
+bacteria_replenish_concentration = 60
+predation_interval = 20
+predation_percentage = 10
+adult_movement_energy_cost = 20
+larvae_movement_energy_cost = 10
+larvae_initial_energy = 200
+wormbag_dormancy = 10
+wormbag_energy_threshold = 1000
+wormbag_max_progeny = 10
+larvae_max_size = 10
+adult_max_size = 20
+size_energy_multiplier = 2000
