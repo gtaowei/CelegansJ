@@ -1,6 +1,6 @@
 package model;
 
-import main.Settings;
+import main.InputParse;
 
 public class Worm {
 	
