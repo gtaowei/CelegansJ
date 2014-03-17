@@ -2,6 +2,8 @@ package agents;
 
 public class Bacteria {
 	
-	//TODO
+	public Bacteria (int id) {
+		
+	}
 	
 }

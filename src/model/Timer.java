@@ -6,6 +6,7 @@ public class Timer {
 	
 	private long initialTime;
 	private InputParse settings = InputParse.instance();
+	private int msTick = settings.millisecond_to_tick_ratio;
 
 	private Timer(){}
 	
@@ -20,7 +21,7 @@ public class Timer {
 	}
 	
 	public long currentTick() {
-		return (System.currentTimeMillis() - initialTime) / settings.millisecond_to_tick_ratio;
+		return (System.currentTimeMillis() - initialTime) / msTick;
 	}
 
 }
