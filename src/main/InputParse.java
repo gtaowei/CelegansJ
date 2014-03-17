@@ -37,6 +37,7 @@ public class InputParse {
 	public int size_energy_multiplier;
 	public int larvae_initial_size;
 	public int adult_initial_size;
+	public int millisecond_to_tick_ratio;
 	
 	private InputParse() {}
 	
@@ -132,6 +133,9 @@ public class InputParse {
 							break;
 						case "adult_initial_size":
 							this.adult_initial_size = Integer.parseInt(inLine.getValue());
+							break;
+						case "millisecond_to_tick_ratio":
+							this.millisecond_to_tick_ratio = Integer.parseInt(inLine.getValue());
 							break;
 						}
 					}

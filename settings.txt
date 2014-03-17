@@ -1,4 +1,5 @@
 output_file = log.txt
+millisecond_to_tick_ratio = 100
 dimension_x = 100
 dimension_y = 100
 dimension_z = 100

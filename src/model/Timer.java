@@ -1,8 +1,11 @@
 package model;
 
+import main.InputParse;
+
 public class Timer {
 	
 	private long initialTime;
+	private InputParse settings = InputParse.instance();
 
 	private Timer(){}
 	
@@ -17,7 +20,7 @@ public class Timer {
 	}
 	
 	public long currentTick() {
-		return (System.currentTimeMillis() - initialTime);
+		return (System.currentTimeMillis() - initialTime) / settings.millisecond_to_tick_ratio;
 	}
 
 }
