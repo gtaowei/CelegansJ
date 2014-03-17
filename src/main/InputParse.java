@@ -35,6 +35,8 @@ public class InputParse {
 	public int larvae_max_size;
 	public int adult_max_size;
 	public int size_energy_multiplier;
+	public int larvae_initial_size;
+	public int adult_initial_size;
 	
 	private InputParse() {}
 	
@@ -124,6 +126,12 @@ public class InputParse {
 							break;
 						case "size_energy_multiplier":
 							this.size_energy_multiplier = Integer.parseInt(inLine.getValue());
+							break;
+						case "larvae_initial_size":
+							this.larvae_initial_size = Integer.parseInt(inLine.getValue());
+							break;
+						case "adult_initial_size":
+							this.adult_initial_size = Integer.parseInt(inLine.getValue());
 							break;
 						}
 					}

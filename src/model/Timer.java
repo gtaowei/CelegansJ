@@ -16,7 +16,7 @@ public class Timer {
 		initialTime = System.currentTimeMillis();
 	}
 	
-	public long currentTime() {
+	public long currentTick() {
 		return (System.currentTimeMillis() - initialTime);
 	}
 

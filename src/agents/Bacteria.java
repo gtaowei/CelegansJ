@@ -1,4 +1,4 @@
-package model;
+package agents;
 
 public class Bacteria {
 	

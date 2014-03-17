@@ -7,7 +7,7 @@ public class Main {
 	public static void main(String args[]) {
 //		Timer t = Timer.instance();
 //		t.initialize();
-//		System.out.println(t.currentTime());
+//		System.out.println(t.currentTick());
 //		InputLine il = new InputLine("output_file = log.txt");
 //		System.out.println(il.getVariable());
 //		System.out.println(il.getValue());
