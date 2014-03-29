@@ -7,7 +7,7 @@ import status.LifeStage;
 import main.InputParse;
 import model.Timer;
 
-public class Worm {
+public class Worm{
 	
 	private int id;
 	private int currentX, currentY, currentZ, energy_reserve, size, num_progeny;
