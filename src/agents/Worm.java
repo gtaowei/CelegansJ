@@ -7,7 +7,7 @@ import status.LifeStage;
 import main.InputParse;
 import model.Timer;
 
-public class Worm{
+public class Worm implements Runnable{
 	
 	private int id;
 	private int currentX, currentY, currentZ, energy_reserve, size, num_progeny;
@@ -17,6 +17,7 @@ public class Worm{
 	private Timer time = Timer.instance();
 	private InputParse settings = InputParse.instance();
 	private Random rand = new Random();
+	private static Random rnd = new Random();
 	
 	public Worm (int id) {
 		this.id = id;
@@ -69,6 +70,17 @@ public class Worm{
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	@Override
+	public void run() {
+		try {
+			Thread.sleep(rnd.nextInt(100));
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Worm #" + id + "just performed action");
 	}
 	
 }

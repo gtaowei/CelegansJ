@@ -20,6 +20,12 @@ public class Tick {
 		barrier.reset();
 	}
 	
+	
+	/**
+	 * this moves the current tick to the next one
+	 * @param parties: the number of worms the tick is waiting on
+	 * @author Wei Tao
+	 */
 	public void tick(int parties) {
 		++currentTick;
 		barrier = new CyclicBarrier(parties);

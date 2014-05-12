@@ -2,6 +2,8 @@ package model;
 
 import main.InputParse;
 
+/*Obsolete class
+ * */
 public class Timer {
 	
 	private long initialTime;
