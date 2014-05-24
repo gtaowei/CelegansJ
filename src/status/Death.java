@@ -10,12 +10,16 @@ public enum Death {
 		switch (this) {
 		case ALIVE:
 			s = "alive";
+			break;
 		case AGEING:
 			s = "ageing";
+			break;
 		case PREDATION:
 			s = "predation";
+			break;
 		case WORMBAG:
 			s = "wormbag explosion";
+			break;
 		}
 		return s;
 	}

@@ -10,10 +10,13 @@ public enum LifeStage {
 		switch (this) {
 		case LARVA:
 			s = "larva";
+			break;
 		case ADULT:
 			s = "adult";
+			break;
 		case WORMBAG:
 			s = "wormbag";
+			break;
 		}
 		return s;
 	}
