@@ -10,7 +10,7 @@ import model.Timer;
 public class Worm implements Runnable{
 	
 	private int id;
-	private int currentX, currentY, currentZ, energy_reserve, size, num_progeny;
+	private int currentX, currentY, currentZ, energy_reserve, mass, num_progeny;
 	private long time_born, time_larva, time_adult, time_wormbag;
 	private LifeStage stage;
 	private Death death;
@@ -27,7 +27,7 @@ public class Worm implements Runnable{
 		this.energy_reserve = settings.initial_worm_energy_min 
 				+ rand.nextInt(settings.initial_worm_energy_max 
 						- settings.initial_worm_energy_min);
-		this.size = settings.adult_initial_size;
+		this.mass = settings.adult_initial_size;
 		this.num_progeny = 0;
 		this.time_born = time.currentTick();
 		this.time_adult = 0;
@@ -43,7 +43,7 @@ public class Worm implements Runnable{
 		this.currentY = currentY;
 		this.currentZ = currentZ;
 		this.energy_reserve = settings.larvae_initial_energy;
-		this.size = settings.larvae_initial_size;
+		this.mass = settings.larvae_initial_size;
 		this.num_progeny = 0;
 		this.time_born = time.currentTick();
 		this.time_adult = 0;

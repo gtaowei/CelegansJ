@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import model.Tick;
 import model.Timer;
 import agents.Worm;
-import status.TableType;
+import status.InputType;
 
 public class Test {
 
 	public static void main(String[] args) {
 		Input newIn = new Input("testIn.xls");
-		InputMatrix testMatrix = newIn.getTable(TableType.INGESTION);
+		InputMatrix testMatrix = newIn.getTable(InputType.INGESTION);
 		testMatrix.print();
 		System.out.println(testMatrix.computeRate(19.1, 0.1));
 //		InputParse parse = InputParse.instance();

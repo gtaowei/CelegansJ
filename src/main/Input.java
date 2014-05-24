@@ -10,24 +10,24 @@ import java.util.Map;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
-import status.TableType;
+import status.InputType;
 
 public class Input {
 
 	protected File excelFile;
 	protected FileInputStream inputFile;
 	protected HSSFWorkbook workbook;
-	protected Map<TableType, InputMatrix> allTables;
+	protected Map<InputType, InputMatrix> allTables;
 
 	public Input(String fileName) {
 		excelFile = new File(fileName);
-		allTables = new HashMap<TableType, InputMatrix>();
+		allTables = new HashMap<InputType, InputMatrix>();
 		try {
 			inputFile = new FileInputStream(excelFile);
 			try {
 				workbook = new HSSFWorkbook(inputFile);
-				for (TableType type : TableType.values()) {
-					if (type != TableType.INVALID) {
+				for (InputType type : InputType.values()) {
+					if (type != InputType.INVALID) {
 						allTables.put(type, new InputMatrix(workbook, type));
 					}
 				}
@@ -42,7 +42,7 @@ public class Input {
 		}
 	}
 
-	public InputMatrix getTable(TableType type) {
+	public InputMatrix getTable(InputType type) {
 		return allTables.get(type);
 	}
 }

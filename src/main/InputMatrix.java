@@ -16,20 +16,20 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 
-import status.TableType;
+import status.InputType;
 
 
 
 public class InputMatrix {
 
-	protected TableType type;
+	protected InputType type;
 	protected HSSFWorkbook workbook;
 	protected HSSFSheet sheet;
 	protected int sizeX, sizeY;
 	protected ArrayList<Double> allX, allY;
 	protected Double[][] allData;
 
-	public InputMatrix(HSSFWorkbook workbook, TableType type) {
+	public InputMatrix(HSSFWorkbook workbook, InputType type) {
 
 		//initialize, establish workSheet based on passed-in type
 		this.workbook = workbook;
@@ -99,7 +99,7 @@ public class InputMatrix {
 		return allData[finalX-1][finalY-1];
 	}
 
-	public TableType getType() {
+	public InputType getType() {
 		return type;
 	}
 

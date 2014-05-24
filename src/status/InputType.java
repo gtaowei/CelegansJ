@@ -1,24 +1,24 @@
 package status;
 
-public enum TableType {
+public enum InputType {
 	INGESTION, ABSORPTION, GROWTH, EXERTION, REPRODUCTION, AGEING, STARVATION, INVALID;
 	
-	public TableType tTypeConvert(String type) {
-		TableType returnType = TableType.INVALID;
+	public InputType iTypeConvert(String type) {
+		InputType returnType = InputType.INVALID;
 		switch (type) {
-		case "INGESTION" : returnType = TableType.INGESTION;
+		case "INGESTION" : returnType = InputType.INGESTION;
 		break;
-		case "ABSORPTION" : returnType = TableType.ABSORPTION;
+		case "ABSORPTION" : returnType = InputType.ABSORPTION;
 		break;
-		case "GROWTH" : returnType = TableType.GROWTH;
+		case "GROWTH" : returnType = InputType.GROWTH;
 		break;
-		case "EXERTION" : returnType = TableType.EXERTION;
+		case "EXERTION" : returnType = InputType.EXERTION;
 		break;
-		case "REPRODUCTION" : returnType = TableType.REPRODUCTION;
+		case "REPRODUCTION" : returnType = InputType.REPRODUCTION;
 		break;
-		case "AGEING" : returnType = TableType.AGEING;
+		case "AGEING" : returnType = InputType.AGEING;
 		break;
-		case "STARVATION" : returnType = TableType.STARVATION;
+		case "STARVATION" : returnType = InputType.STARVATION;
 		break;
 		}
 		return returnType;
