@@ -13,12 +13,12 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import status.TableType;
 
 public class Input {
-	
+
 	protected File excelFile;
 	protected FileInputStream inputFile;
 	protected HSSFWorkbook workbook;
 	protected Map<TableType, InputMatrix> allTables;
-	
+
 	public Input(String fileName) {
 		excelFile = new File(fileName);
 		allTables = new HashMap<TableType, InputMatrix>();
@@ -27,21 +27,21 @@ public class Input {
 			try {
 				workbook = new HSSFWorkbook(inputFile);
 				for (TableType type : TableType.values()) {
-					allTables.put(type, new InputMatrix(workbook, type));
+					if (type != TableType.INVALID) {
+						allTables.put(type, new InputMatrix(workbook, type));
+					}
 				}
 				inputFile.close();
 			} catch (IOException e) {
-				System.out.println("Excel file cannot be read!");
-				// TODO Auto-generated catch block
+				System.out.println("WARNING: Excel file cannot be read!");
 				e.printStackTrace();
 			}
 		} catch (FileNotFoundException e) {
-			System.out.println("Input file not found!");
-			// TODO Auto-generated catch block
+			System.out.println("WARNING: Input file not found!");
 			e.printStackTrace();
 		}
 	}
-	
+
 	public InputMatrix getTable(TableType type) {
 		return allTables.get(type);
 	}

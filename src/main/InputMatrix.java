@@ -35,6 +35,10 @@ public class InputMatrix {
 		this.workbook = workbook;
 		this.type = type;
 		sheet = workbook.getSheet(type.toString());
+		if (sheet == null) {
+			System.out.println("WARNING: " + type.toString() + " cannot be loaded!");
+			return;
+		} else {System.out.println(type.toString() + " has been loaded."); }
 		allX = new ArrayList<Double>();
 		allY = new ArrayList<Double>();
 		sizeX = 0;
@@ -119,8 +123,15 @@ public class InputMatrix {
 		return allData;
 	}
 
+	//only for testing purposes
 	public void print() {
-		for (int i = 0; i < sizeX; ++i){
+		System.out.print("    ");
+		for (int i = 0; i < sizeX; ++i) {
+			System.out.print(allX.get(i) + " ");
+		}
+		System.out.println();
+		for (int i = 0; i < sizeX; ++i) {
+			System.out.print(allY.get(i) + " ");
 			for (int j = 0; j < sizeY; ++j) {
 				System.out.print(allData[i][j] + " ");
 			}
