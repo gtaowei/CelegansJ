@@ -1,14 +1,13 @@
-package main;
+package io;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import status.InputType;
 
@@ -16,7 +15,7 @@ public class Input {
 
 	protected File excelFile;
 	protected FileInputStream inputFile;
-	protected HSSFWorkbook workbook;
+	protected XSSFWorkbook workbook;
 	protected Map<InputType, InputMatrix> allTables;
 
 	public Input(String fileName) {
@@ -25,7 +24,7 @@ public class Input {
 		try {
 			inputFile = new FileInputStream(excelFile);
 			try {
-				workbook = new HSSFWorkbook(inputFile);
+				workbook = new XSSFWorkbook(inputFile);
 				for (InputType type : InputType.values()) {
 					if (type != InputType.INVALID) {
 						allTables.put(type, new InputMatrix(workbook, type));

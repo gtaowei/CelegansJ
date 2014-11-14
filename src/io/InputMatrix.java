@@ -1,21 +1,12 @@
-package main;
+package io;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.lang.Math;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
-
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import status.InputType;
 
 
@@ -23,13 +14,13 @@ import status.InputType;
 public class InputMatrix {
 
 	protected InputType type;
-	protected HSSFWorkbook workbook;
-	protected HSSFSheet sheet;
+	protected XSSFWorkbook workbook;
+	protected XSSFSheet sheet;
 	protected int sizeX, sizeY;
 	protected ArrayList<Double> allX, allY;
 	protected Double[][] allData;
 
-	public InputMatrix(HSSFWorkbook workbook, InputType type) {
+	public InputMatrix(XSSFWorkbook workbook, InputType type) {
 
 		//initialize, establish workSheet based on passed-in type
 		this.workbook = workbook;

@@ -1,14 +1,14 @@
 package model;
 
-import main.InputParse;
+import io.SettingsHolder;
 
 /*Obsolete class
  * */
 public class Timer {
 	
 	private long initialTime;
-	private InputParse settings = InputParse.instance();
-	private int msTick = settings.millisecond_to_tick_ratio;
+	private SettingsHolder settings = SettingsHolder.getInstance();
+	private int msTick = 100;//Integer.parseInt(settings.getProperty("millisecond_to_tick_ratio"));
 
 	private Timer(){}
 	

@@ -1,4 +1,4 @@
-package main;
+package io;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 
 import javax.swing.JOptionPane;
 
+/*Deprecated
+ * */
 public class InputParse {
 	
 	public String output_file;

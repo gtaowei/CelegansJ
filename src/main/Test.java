@@ -1,5 +1,9 @@
 package main;
 
+import io.InputParse;
+import io.Output;
+import io.SettingsHolder;
+
 import java.util.ArrayList;
 
 import model.Tick;
@@ -10,10 +14,25 @@ import status.InputType;
 public class Test {
 
 	public static void main(String[] args) {
-		Input newIn = new Input("testIn.xls");
-		InputMatrix testMatrix = newIn.getTable(InputType.INGESTION);
-		testMatrix.print();
-		System.out.println(testMatrix.computeRate(19.1, 0.1));
+		
+		SettingsHolder settings = SettingsHolder.getInstance();
+		settings.load("settings.txt");
+		System.out.println(settings.getProperty("dimension_x"));
+//		settings.store("testStore.propertxies", "Test");
+		Timer t = Timer.instance();
+		t.initialize();
+		final ArrayList<Worm> worms = new ArrayList<Worm>();
+//		System.out.println(t.currentTick());
+		for (int i = 0; i < 100; i++) {
+			worms.add(new Worm (i));
+		}
+		Output out = new Output("out.xls");
+		out.log(1, worms);
+		
+//		Input newIn = new Input("testIn.xls");
+//		InputMatrix testMatrix = newIn.getTable(InputType.INGESTION);
+//		testMatrix.print();
+//		System.out.println(testMatrix.computeRate(19.1, 0.1));
 //		InputParse parse = InputParse.instance();
 //		parse.initialize("settings.txt");
 //		Timer t = Timer.instance();
