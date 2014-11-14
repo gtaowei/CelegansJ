@@ -128,6 +128,7 @@ public enum OutputType {
 				break;
 			}
 			values.put(curId, value);
+			System.out.println(curId + " " + value);
 		}
 		return values;
 	}

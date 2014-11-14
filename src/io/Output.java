@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import agents.Worm;
@@ -13,7 +14,7 @@ import status.OutputType;
 
 public class Output {
 	
-	private XSSFWorkbook workbook;
+	private HSSFWorkbook workbook;
 	private ArrayList<OutputMatrix> sheets;
 	private FileOutputStream outStream;
 	
@@ -23,7 +24,7 @@ public class Output {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		this.workbook = new XSSFWorkbook();
+		this.workbook = new HSSFWorkbook();
 		this.sheets = new ArrayList<OutputMatrix>();
 		for (OutputType type : OutputType.values()) {
 			OutputMatrix newSheet = new OutputMatrix(workbook, type);

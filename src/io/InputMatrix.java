@@ -3,10 +3,13 @@ package io;
 import java.util.ArrayList;
 import java.lang.Math;
 
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import status.InputType;
 
 
@@ -14,18 +17,18 @@ import status.InputType;
 public class InputMatrix {
 
 	protected InputType type;
-	protected XSSFWorkbook workbook;
-	protected XSSFSheet sheet;
+	protected HSSFWorkbook workbook;
+	protected HSSFSheet sheet;
 	protected int sizeX, sizeY;
 	protected ArrayList<Double> allX, allY;
 	protected Double[][] allData;
 
-	public InputMatrix(XSSFWorkbook workbook, InputType type) {
+	public InputMatrix(HSSFWorkbook workbook2, InputType type) {
 
 		//initialize, establish workSheet based on passed-in type
-		this.workbook = workbook;
+		this.workbook = workbook2;
 		this.type = type;
-		sheet = workbook.getSheet(type.toString());
+		sheet = workbook2.getSheet(type.toString());
 		if (sheet == null) {
 			System.out.println("WARNING: " + type.toString() + " cannot be loaded!");
 			return;

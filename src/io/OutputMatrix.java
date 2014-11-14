@@ -3,6 +3,8 @@ package io;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -12,10 +14,10 @@ import status.OutputType;
 public class OutputMatrix {
 	
 	private OutputType type;
-	private XSSFSheet sheet;
+	private HSSFSheet sheet;
 	private OutputLine printer;
 	
-	public OutputMatrix(XSSFWorkbook workbook, OutputType type) {
+	public OutputMatrix(HSSFWorkbook workbook, OutputType type) {
 		this.type = type;
 		this.sheet = workbook.createSheet(type.toString());
 		this.printer = new OutputLine(this.sheet);

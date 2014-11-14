@@ -2,7 +2,7 @@ package status;
 
 public enum Death {
 
-	ALIVE, AGEING, PREDATION, WORMBAG;
+	ALIVE, AGEING, PREDATION, STARVATION, WORMBAG;
 
 	@Override
 	public String toString() {
@@ -16,6 +16,9 @@ public enum Death {
 			break;
 		case PREDATION:
 			s = "predation";
+			break;
+		case STARVATION:
+			s = "starvation";
 			break;
 		case WORMBAG:
 			s = "wormbag explosion";

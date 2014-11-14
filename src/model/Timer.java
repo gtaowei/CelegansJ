@@ -2,14 +2,11 @@ package model;
 
 import io.SettingsHolder;
 
-/*Obsolete class
- * */
 public class Timer {
 	
-	private long initialTime;
 	private SettingsHolder settings = SettingsHolder.getInstance();
-	private int msTick = 100;//Integer.parseInt(settings.getProperty("millisecond_to_tick_ratio"));
-
+	private static int currentTick;
+	
 	private Timer(){}
 	
 	private static Timer staticDefaultTimer = new Timer();
@@ -18,12 +15,16 @@ public class Timer {
 		return staticDefaultTimer;
 	}
 	
-	public void initialize() {
-		initialTime = System.currentTimeMillis();
+	public void init() {
+		currentTick = 0;
 	}
 	
-	public long currentTick() {
-		return (System.currentTimeMillis() - initialTime) / msTick;
+	public void incr() {
+		currentTick++;
+	}
+	
+	public static int currentTick() {
+		return currentTick;
 	}
 
 }

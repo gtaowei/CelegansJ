@@ -2,7 +2,7 @@ package status;
 
 public enum LifeStage {
 
-	LARVA, ADULT, WORMBAG;
+	LARVA, ADULT, WORMBAG, DEAD;
 
 	@Override
 	public String toString() {
@@ -16,6 +16,9 @@ public enum LifeStage {
 			break;
 		case WORMBAG:
 			s = "wormbag";
+			break;
+		case DEAD:
+			s = "dead";
 			break;
 		}
 		return s;

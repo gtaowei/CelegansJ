@@ -9,11 +9,12 @@ import status.Death;
 import status.LifeStage;
 import model.Timer;
 
-public class Worm implements Runnable{
-	
+public class Worm implements Runnable {
+
 	public int id;
-	public double currentX, currentY, currentZ, energy_reserve, mass, num_progeny;
-	public long time_born, time_larva, time_adult, time_wormbag;
+	public double currentX, currentY, currentZ, energy_reserve, mass,
+			num_progeny;
+	public int time_born, time_larva, time_adult, time_wormbag, time_die;
 	public LifeStage stage;
 	public Death death;
 	private Timer time = Timer.instance();
@@ -21,17 +22,24 @@ public class Worm implements Runnable{
 	private Random rand = new Random();
 	private static Random rnd = new Random();
 	private Phenotype phenotype;
-	
-	public Worm (int id) {
+	private int tick_time;
+
+	public Worm(int id) {
 		this.id = id;
-		System.out.println(settings.getProperty("dimension_x"));
-		this.currentX = rand.nextInt(Integer.parseInt(settings.getProperty("dimension_x")));
-		this.currentY = rand.nextInt(Integer.parseInt(settings.getProperty("dimension_y")));
-		this.currentZ = rand.nextInt(Integer.parseInt(settings.getProperty("dimension_z")));
-		this.energy_reserve = Integer.parseInt(settings.getProperty("initial_worm_energy_min")) 
-				+ rand.nextInt(Integer.parseInt(settings.getProperty("initial_worm_energy_max")) 
-						- Integer.parseInt(settings.getProperty("initial_worm_energy_min")));
-		this.mass = Integer.parseInt(settings.getProperty("adult_initial_size"));
+		this.currentX = rand.nextInt(Integer.parseInt(settings
+				.getProperty("dimension_x")));
+		this.currentY = rand.nextInt(Integer.parseInt(settings
+				.getProperty("dimension_y")));
+		this.currentZ = rand.nextInt(Integer.parseInt(settings
+				.getProperty("dimension_z")));
+		this.energy_reserve = Integer.parseInt(settings
+				.getProperty("initial_worm_energy_min"))
+				+ rand.nextInt(Integer.parseInt(settings
+						.getProperty("initial_worm_energy_max"))
+						- Integer.parseInt(settings
+								.getProperty("initial_worm_energy_min")));
+		this.mass = Integer
+				.parseInt(settings.getProperty("adult_initial_size"));
 		this.num_progeny = 0;
 		this.time_born = time.currentTick();
 		this.time_adult = 0;
@@ -40,15 +48,18 @@ public class Worm implements Runnable{
 		this.stage = LifeStage.ADULT;
 		this.death = Death.ALIVE;
 		this.phenotype = new Phenotype();
+		this.tick_time = Integer.parseInt(settings.getProperty("tick_time"));
 	}
-	
-	public Worm (int id, int currentX, int currentY, int currentZ) {
+
+	public Worm(int id, int currentX, int currentY, int currentZ) {
 		this.id = id;
 		this.currentX = currentX;
 		this.currentY = currentY;
 		this.currentZ = currentZ;
-		this.energy_reserve = Integer.parseInt(settings.getProperty("larvae_initial_energy"));
-		this.mass = Integer.parseInt(settings.getProperty("larvae_initial_size"));
+		this.energy_reserve = Integer.parseInt(settings
+				.getProperty("larvae_initial_energy"));
+		this.mass = Integer.parseInt(settings
+				.getProperty("larvae_initial_size"));
 		this.num_progeny = 0;
 		this.time_born = time.currentTick();
 		this.time_adult = 0;
@@ -58,67 +69,135 @@ public class Worm implements Runnable{
 		this.death = Death.ALIVE;
 		this.phenotype = new Phenotype();
 	}
-	
+
 	public void ingest(double amount, double absorbPortion) {
-		if (phenotype.getTrait("ingestion") != null) {
-			double newAmount = phenotype.getTrait("ingestion") * amount;
-			absorb(newAmount, absorbPortion);
-		} else {
-			absorb(amount, absorbPortion);
+		if (death == Death.ALIVE) {
+			if (phenotype.getTrait("ingestion") != null) {
+				double newAmount = phenotype.getTrait("ingestion") * amount
+						* tick_time;
+				absorb(newAmount, absorbPortion);
+			} else {
+				absorb(amount, absorbPortion);
+			}
 		}
 	}
-	
+
 	private void absorb(double amount, double portion) {
 		if (phenotype.getTrait("absorption") != null) {
-			this.energy_reserve += phenotype.getTrait("absorption") * portion * amount;
+			this.energy_reserve += phenotype.getTrait("absorption") * portion
+					* amount;
 		} else {
 			this.energy_reserve += portion * amount;
 		}
 	}
-	
-	public void grow(double portion) {
-		if (phenotype.getTrait("growth") != null) {
-			double amount = this.energy_reserve * phenotype.getTrait("growth") * portion;
-			this.mass += amount;
-			this.energy_reserve -= amount;
-		} else {
-			double amount = this.energy_reserve * portion;
-			this.mass += amount;
-			this.energy_reserve -= amount;
+
+	public void grow(double rate) {
+		if (death == Death.ALIVE) {
+			if (phenotype.getTrait("growth") != null) {
+				double amount = phenotype.getTrait("growth") * rate * tick_time;
+				if (amount > energy_reserve) {
+					amount = energy_reserve;
+				}
+				this.mass += amount;
+				this.energy_reserve -= amount;
+			} else {
+				double amount = rate * tick_time;
+				this.mass += amount;
+				this.energy_reserve -= amount;
+			}
+			if (mass >= Integer.parseInt(settings.getProperty("larvae_adult_threshold"))){
+				this.stage = LifeStage.ADULT;
+				this.time_adult = Timer.currentTick();
+			}
 		}
 	}
-	
+
 	public void exert(double amount) {
-		if (phenotype.getTrait("exertion") != null) {
-			this.energy_reserve -= phenotype.getTrait("exertion") * amount;
-		} else {
-			this.energy_reserve -= amount;
+		if (death == Death.ALIVE) {
+			if (phenotype.getTrait("exertion") != null) {
+				this.energy_reserve -= phenotype.getTrait("exertion") * amount
+						* tick_time;
+			} else {
+				this.energy_reserve -= amount * tick_time;
+			}
 		}
 	}
-	
-	public void age() {
-		
+
+	public void age(double probability) {
+		if (death == Death.ALIVE) {
+			double hit = Math.random();
+			if (hit < probability) {
+				die(Death.AGEING);
+			}
+		}
+	}
+
+	public void die(Death way) {
+		this.death = way;
+		this.stage = LifeStage.DEAD;
+		this.time_die = Timer.currentTick();
+	}
+
+	public void wormbag() {
+		this.death = Death.WORMBAG;
+		this.stage = LifeStage.WORMBAG;
+		this.time_wormbag = Timer.currentTick();
 	}
 	
+	public void explode(int maxId, double cost, ArrayList<Worm> worms) {
+		if (stage == LifeStage.WORMBAG){
+			int curTick = Timer.currentTick();
+			if ((curTick - this.time_wormbag) > Integer.parseInt(settings.getProperty("wormbag_dormancy"))){
+				this.stage = LifeStage.DEAD;
+				this.time_die = Timer.currentTick();
+				int counter = maxId;
+				while ((this.energy_reserve - cost)>0) {
+					counter++;
+					Worm larva = new Worm(counter);
+					worms.add(larva);
+					this.energy_reserve -= cost;
+					this.num_progeny++;
+				}
+			}
+		}	
+	}
+
 	public void reproduce(int num, int maxId, double cost, ArrayList<Worm> worms) {
-		int newnum;
-		if (phenotype.getTrait("reproduction") != null) {
-			newnum = (int) (phenotype.getTrait("exertion") * num);
-		} else {
-			newnum = num;
+		if (this.stage == LifeStage.ADULT) {
+			int newnum;
+			if (phenotype.getTrait("reproduction") != null) {
+				newnum = (int) (phenotype.getTrait("exertion") * num * tick_time);
+			} else {
+				newnum = num * tick_time;
+			}
+			int counter = maxId;
+			for (int i = 0; i < newnum; i++) {
+				if ((this.energy_reserve - cost) < 0) {
+					break;
+				}
+				counter++;
+				Worm larva = new Worm(counter);
+				worms.add(larva);
+				this.energy_reserve -= cost;
+				this.num_progeny++;
+			}
 		}
-		int counter = maxId;
-		for (int i = 0; i<newnum; i++) {
-			counter++;
-			Worm larva = new Worm(counter);
-			worms.add(larva);
-		}
-		this.num_progeny += newnum;
-		this.energy_reserve -= newnum * cost;
 	}
-	
-	public void starve() {
-		
+
+	public void starve(double probability) {
+		if (death == Death.ALIVE) {
+			double hit = Math.random();
+			if (hit < probability) {
+				switch (stage) {
+				case LARVA:
+					die(Death.STARVATION);
+					break;
+				case ADULT:
+					wormbag();
+					break;
+				}
+			}
+		}
 	}
 
 	@Override
@@ -148,7 +227,6 @@ public class Worm implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Worm #" + id + "just performed action");
 	}
-	
+
 }
